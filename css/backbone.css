@@ -19,7 +19,7 @@ main {
 
 .menu-title {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 900;
     margin-bottom: 1em;
 }
 
@@ -41,7 +41,7 @@ article header {
 }
 
 form {
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 form, .name-div, .other-div {
@@ -52,7 +52,7 @@ form, .name-div, .other-div {
     flex: 1;
 }
 
-#experience, #startDate{
+#email,#phone,#experience, #startDate,#password,#confirmPassword{
     flex: 1;
     min-width: 0;
 }
@@ -60,4 +60,5 @@ form, .name-div, .other-div {
 .input-div {
     align-items: center;
     padding: 0.5em;
+    gap: 1em
 }

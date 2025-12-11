@@ -22,3 +22,8 @@ img {
   display: block;
   max-inline-size: 100%;
 }
+
+button {
+  cursor: pointer;
+  border: none;
+}

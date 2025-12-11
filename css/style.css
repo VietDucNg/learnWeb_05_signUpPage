@@ -48,7 +48,51 @@ p {
   max-width: 70ch;
 }
 
-
 article {
   max-width: 70ch;
+}
+
+body {
+  background-color: black;
+}
+
+.background-img {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+* {
+  color: aliceblue;
+}
+
+.signup-btn {
+  background-color: #1a82f2;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+article {
+  background-color: rgb(30, 30, 30, 0.5);
+}
+
+.input-div {
+  background-color: rgb(50,50,50,0.8);
+  border-radius: 5px;
+}
+
+i {
+  color:aliceblue;
+}
+
+input, select {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+option {
+  color:black;
 }
