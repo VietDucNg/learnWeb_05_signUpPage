@@ -56,10 +56,19 @@ function checkEmail(){
     }
 }
 
+function checkPhone(){
+    const phonePattern = /^(?:\+[1-9]\d{7,14}|0\d{7,14})$/;
+    if (phone.value.trim() !== '' && !phone.value.match(phonePattern)){
+        setError(phone,'Enter a valid phone')
+        valid=false;
+    }
+}
+
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearErrors();
     valid=true;
     checkEmail();
+    checkPhone();
     applyCheckEmpty();
 })
