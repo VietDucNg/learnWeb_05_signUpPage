@@ -57,9 +57,24 @@ function checkEmail(){
 }
 
 function checkPhone(){
-    const phonePattern = /^(?:\+[1-9]\d{7,14}|0\d{7,14})$/;
-    if (phone.value.trim() !== '' && !phone.value.match(phonePattern)){
-        setError(phone,'Enter a valid phone')
+    const value = phone.value.trim();
+    const digits = value.replace(/\+/g, '');
+    if (value && !value.match(/^\+?\d+$/)) {
+        setError(phone, 'Phone number can only contain digits, or start with +')
+        valid=false;
+    } else if (value && digits.length < 8 || digits.length > 15) {
+        setError(phone,'Phone number must contain 8-15 digits');
+        valid=false;
+    } else if (value && value.startsWith('+')) {
+        if (!value.match(/^\+\d/)) {
+            setError(phone,'Number cannot end with +. It must be followed by digits');
+            valid=false
+        } else if (value.match(/^\+0/)) {
+            setError(phone, 'When using international format (+), the first digit cannot be 0');
+            valid=false;
+        }
+    } else if (value && !value.match(/^0/)){
+        setError(phone, 'Local numbers must start with 0');
         valid=false;
     }
 }
