@@ -72,6 +72,16 @@ body {
   background-color: #1a82f2;
   font-weight: bold;
   border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.signup-btn:hover {
+  background-color: #2e92fd;
+  transform: translateY(-2px);
+}
+
+.signup-btn:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 article {
@@ -83,8 +93,16 @@ article {
   border-radius: 5px;
 }
 
+.input-div:hover, label:hover {
+  cursor: pointer;
+}
+
 i {
   color:aliceblue;
+}
+
+option {
+  color:black;
 }
 
 input, select {
@@ -93,6 +111,15 @@ input, select {
   outline: none;
 }
 
-option {
-  color:black;
+.focus {
+  border: 1px solid #1a82f2bf;
+}
+
+.error {
+  color: red;
+}
+
+.signup-msg {
+  text-align: center;
+  color: green
 }
