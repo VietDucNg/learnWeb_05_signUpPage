@@ -44,9 +44,22 @@ function checkEmpty(input){
         valid=false;
     }
 }
+function applyCheckEmpty(){
+    requiredInputs.forEach(input => checkEmpty(input))
+}
+
+function checkEmail(){
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email.value.match(emailPattern)) {
+        setError(email, 'Enter a valid email')
+        valid=false;
+    }
+}
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearErrors();
-    requiredInputs.forEach(input => checkEmpty(input))
+    valid=true;
+    checkEmail();
+    applyCheckEmpty();
 })
