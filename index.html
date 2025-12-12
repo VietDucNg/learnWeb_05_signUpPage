@@ -25,18 +25,18 @@
     <script type="module" src="js/main.js"></script>
   </head>
   <body>
-    <img
+    <!-- <img
       class="background-img"
       src="img/background.png"
       alt="background image of a Muay Thai warrior"
-    />
+    /> -->
     <main class="row">
       <section class="menu">
         <header class="menu-title">
           Unleash Your inner warrior <br />
           and elevate your spirit!
         </header>
-        <button class="signup-btn">Join the Fight</button>
+        <button class="signup-btn" form="signup-form">Join the Fight</button>
         <p class="login-msg">Already a member? <a href="">Log in</a></p>
       </section>
       <article class="signup-div">
@@ -45,7 +45,7 @@
           Sign up today to start your Muay Thai journey and <br />
           transform your mind and body.
         </p>
-        <form action="" class="signup-form column">
+        <form action="" class="signup-form column" id="signup-form" novalidate>
           <section class="name-div row">
             <div class="field-div firstName-div">
               <label for="firstName">First Name</label>
@@ -132,7 +132,7 @@
             <label for="password">Password</label>
             <div class="input-div row">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" name="password" id="password" />
+              <input type="password" name="password" id="password" required />
             </div>
             <small class="error"></small>
           </section>
@@ -145,6 +145,7 @@
                 type="password"
                 name="confirmPassword"
                 id="confirmPassword"
+                required
               />
             </div>
             <small class="error"></small>

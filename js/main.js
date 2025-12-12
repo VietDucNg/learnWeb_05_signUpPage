@@ -1,13 +1,15 @@
 const inputDivs = document.querySelectorAll('.input-div');
+const form = document.querySelector('.signup-form');
 const firstName = document.getElementById("firstName");
 const lastName = document.getElementById('lastName');
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
-const errors = document.querySelector('.error')
+const errors = document.querySelectorAll('.error')
 const signupMsg = document.querySelector('.signup-msg');
-
+const signupBtns = document.querySelectorAll('.signup-btn');
+const requiredInputs = document.querySelectorAll('input[required]')
 
 // deal with focus style for input-div
 inputDivs.forEach(div => div.addEventListener('click',()=>{
@@ -24,3 +26,27 @@ document.addEventListener('click', (e)=>{
     });
 });
 
+// validation
+function setError(input, msg){
+    input.parentElement.parentElement.querySelector('.error').textContent = msg;
+}
+
+function clearErrors(){
+    errors.forEach(error => error.textContent = '');
+    signupMsg.textContent = '';
+}
+
+let valid = true;
+
+function checkEmpty(input){
+    if (input.value.trim()==='') {
+        setError(input, '*This field is required')
+        valid=false;
+    }
+}
+
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    clearErrors();
+    requiredInputs.forEach(input => checkEmpty(input))
+})
