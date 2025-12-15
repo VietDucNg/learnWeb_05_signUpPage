@@ -7,7 +7,7 @@ const phone = document.getElementById("phone");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
 const errors = document.querySelectorAll('.error')
-const signupMsg = document.querySelector('.signup-msg');
+const successMsg = document.querySelector('.signup-msg');
 const signupBtns = document.querySelectorAll('.signup-btn');
 const requiredInputs = document.querySelectorAll('input[required]')
 
@@ -36,9 +36,15 @@ function setValid(input) {
     input.parentElement.classList.add('valid');
 }
 
-function clearValidation(){
+function clearValidation(input){
+    const error = input.parentElement.parentElement.querySelector('.error');
+    error.textContent = '';
+    input.parentElement.classList.remove('invalid','valid');
+}
+
+function clearValidationAll(){
     errors.forEach(error => error.textContent = '');
-    signupMsg.textContent = '';
+    successMsg.textContent = '';
     inputDivs.forEach(div => div.classList.remove('invalid','valid'))
 }
 
@@ -46,10 +52,10 @@ let valid = true;
 
 function checkName(name){
     const string = name.value.trim();
-    if (!string.match(/^[a-zA-Z ]{2,30}$/)){
+    if (string && !string.match(/^[a-zA-Z ]{2,30}$/)){
         setInvalid(name, 'Enter a valid name');
         valid=false
-    } else setValid(name);
+    } else if (string) setValid(name);
 }
 
 function checkEmail(){
@@ -119,15 +125,20 @@ function applyCheckEmpty(){
 
 function reset() {
     if (valid) {
-        clearValidation();
-        signupMsg.textContent = 'Welcome to the ring!';
+        clearValidationAll();
+        successMsg.textContent = 'Welcome to the ring!';
         form.reset();
     }
 }
 
+firstName.addEventListener('input', ()=> {
+    clearValidation(firstName);
+    checkName(firstName);
+});
+
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
-    clearValidation();
+    clearValidationAll();
     valid=true;
     checkName(firstName);
     checkName(lastName);
