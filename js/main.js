@@ -119,6 +119,7 @@ function applyCheckEmpty(){
 
 function reset() {
     if (valid) {
+        clearValidation();
         signupMsg.textContent = 'Welcome to the ring!';
         form.reset();
     }
