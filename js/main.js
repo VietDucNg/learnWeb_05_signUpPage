@@ -136,6 +136,11 @@ firstName.addEventListener('input', ()=> {
     checkName(firstName);
 });
 
+lastName.addEventListener('input', ()=> {
+    clearValidation(lastName);
+    checkName(lastName);
+})
+
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearValidationAll();
