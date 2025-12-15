@@ -60,10 +60,11 @@ function checkName(name){
 
 function checkEmail(){
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!email.value.match(emailPattern)) {
+    const string = email.value.trim();
+    if (string && !string.match(emailPattern)) {
         setInvalid(email, 'Enter a valid email')
         valid=false;
-    } else setValid(email);
+    } else if (string) setValid(email);
 }
 
 function checkPhone(){
@@ -139,6 +140,11 @@ firstName.addEventListener('input', ()=> {
 lastName.addEventListener('input', ()=> {
     clearValidation(lastName);
     checkName(lastName);
+})
+
+email.addEventListener('input', ()=> {
+    clearValidation(email);
+    checkEmail();
 })
 
 form.addEventListener('submit', (e)=>{
