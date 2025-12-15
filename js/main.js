@@ -96,6 +96,13 @@ function checkPass(){
     }
 }
 
+function checkConfirmPass() {
+    if (confirmPassword.value !== password.value) {
+        setError(confirmPassword, 'Passwords do not match');
+        valid=false;
+    }
+}
+
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearErrors();
@@ -103,5 +110,7 @@ form.addEventListener('submit', (e)=>{
     checkEmail();
     checkPhone();
     checkPass();
+    checkConfirmPass();
     applyCheckEmpty();
 })
+
