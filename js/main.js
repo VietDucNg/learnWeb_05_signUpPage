@@ -27,20 +27,26 @@ document.addEventListener('click', (e)=>{
 });
 
 // validation
-function setError(input, msg){
+function setInvalid(input, msg){
     input.parentElement.parentElement.querySelector('.error').textContent = msg;
+    input.parentElement.classList.add('invalid');
 }
 
-function clearErrors(){
+function setValid(input) {
+    input.parentElement.classList.add('valid');
+}
+
+function clearValidation(){
     errors.forEach(error => error.textContent = '');
     signupMsg.textContent = '';
+    inputDivs.forEach(div => div.classList.remove('invalid','valid'))
 }
 
 let valid = true;
 
 function checkEmpty(input){
     if (input.value.trim()==='') {
-        setError(input, '*This field is required')
+        setInvalid(input, '*This field is required')
         valid=false;
     }
 }
@@ -51,56 +57,56 @@ function applyCheckEmpty(){
 function checkEmail(){
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!email.value.match(emailPattern)) {
-        setError(email, 'Enter a valid email')
+        setInvalid(email, 'Enter a valid email')
         valid=false;
-    }
+    } else setValid(email);
 }
 
 function checkPhone(){
     const value = phone.value.trim();
     const digits = value.replace(/\+/g, '');
     if (value && !value.match(/^\+?\d+$/)) {
-        setError(phone, 'Phone number can only contain digits, or start with +')
+        setInvalid(phone, 'Phone number can only contain digits, or start with +')
         valid=false;
     } else if (value && digits.length < 8 || digits.length > 15) {
-        setError(phone,'Phone number must contain 8-15 digits');
+        setInvalid(phone,'Phone number must contain 8-15 digits');
         valid=false;
     } else if (value && value.startsWith('+')) {
         if (!value.match(/^\+\d/)) {
-            setError(phone,'Number cannot end with +. It must be followed by digits');
+            setInvalid(phone,'Number cannot end with +. It must be followed by digits');
             valid=false
         } else if (value.match(/^\+0/)) {
-            setError(phone, 'When using international format (+), the first digit cannot be 0');
+            setInvalid(phone, 'When using international format (+), the first digit cannot be 0');
             valid=false;
         }
     } else if (value && !value.match(/^0/)){
-        setError(phone, 'Local numbers must start with 0');
+        setInvalid(phone, 'Local numbers must start with 0');
         valid=false;
-    }
+    } else if (value) setValid(phone);
 }
 
 function checkPass(){
     const value = password.value.trim();
     if (value.length < 8) {
-        setError(password, 'Password must be at least 8 characters long');
+        setInvalid(password, 'Password must be at least 8 characters long');
         valid=false;
     } else if (!value.match(/[A-Z]/)) {
-        setError(password, 'Password must contain at least one uppercase letter');
+        setInvalid(password, 'Password must contain at least one uppercase letter');
         valid=false;
     } else if (!value.match(/[0-9]/)) {
-        setError(password, 'Password must contain at least one number');
+        setInvalid(password, 'Password must contain at least one number');
         valid=false;
     } else if (!value.match(/[#?!@$%^&*-]/)) {
-        setError(password, 'Password must contain at least one special character');
+        setInvalid(password, 'Password must contain at least one special character');
         valid=false;
-    }
+    } else setValid(password);
 }
 
 function checkConfirmPass() {
     if (confirmPassword.value !== password.value) {
-        setError(confirmPassword, 'Passwords do not match');
+        setInvalid(confirmPassword, 'Passwords do not match');
         valid=false;
-    }
+    } else if (confirmPassword.value.trim().length>0) setValid(confirmPassword);
 }
 
 function reset() {
@@ -112,7 +118,7 @@ function reset() {
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
-    clearErrors();
+    clearValidation();
     valid=true;
     checkEmail();
     checkPhone();
