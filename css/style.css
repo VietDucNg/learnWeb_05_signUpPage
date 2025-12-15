@@ -91,6 +91,7 @@ article {
 .input-div {
   background-color: rgb(50,50,50,0.8);
   border-radius: 5px;
+  border: 1px solid transparent;
 }
 
 .input-div:hover, label:hover {
