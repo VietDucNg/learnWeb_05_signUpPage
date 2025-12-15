@@ -108,10 +108,11 @@ function checkPass(){
 }
 
 function checkConfirmPass() {
-    if (confirmPassword.value !== password.value) {
+    const string = confirmPassword.value.trim();
+    if (string && string !== password.value.trim()) {
         setInvalid(confirmPassword, 'Passwords do not match');
         valid=false;
-    } else if (confirmPassword.value.trim().length>0) setValid(confirmPassword);
+    } else if (string) setValid(confirmPassword);
 }
 
 function checkEmpty(input){
@@ -155,6 +156,13 @@ phone.addEventListener('input', ()=> {
 password.addEventListener('input', ()=>{
     clearValidation(password);
     checkPass();
+    clearValidation(confirmPassword);
+    checkConfirmPass();
+})
+
+confirmPassword.addEventListener('input', ()=>{
+    clearValidation(confirmPassword);
+    checkConfirmPass();
 })
 
 form.addEventListener('submit', (e)=>{
