@@ -103,6 +103,13 @@ function checkConfirmPass() {
     }
 }
 
+function reset() {
+    if (valid) {
+        signupMsg.textContent = 'Welcome to the ring!';
+        form.reset();
+    }
+}
+
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearErrors();
@@ -112,5 +119,6 @@ form.addEventListener('submit', (e)=>{
     checkPass();
     checkConfirmPass();
     applyCheckEmpty();
+    reset();
 })
 
