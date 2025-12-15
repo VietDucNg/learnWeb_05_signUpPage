@@ -83,7 +83,7 @@ function checkPhone(){
         } else if (value.match(/^\+0/)) {
             setInvalid(phone, 'When using international format (+), the first digit cannot be 0');
             valid=false;
-        }
+        } else setValid(phone);
     } else if (value && !value.match(/^0/)){
         setInvalid(phone, 'Local numbers must start with 0');
         valid=false;
@@ -145,6 +145,11 @@ lastName.addEventListener('input', ()=> {
 email.addEventListener('input', ()=> {
     clearValidation(email);
     checkEmail();
+})
+
+phone.addEventListener('input', ()=> {
+    clearValidation(phone);
+    checkPhone();
 })
 
 form.addEventListener('submit', (e)=>{
