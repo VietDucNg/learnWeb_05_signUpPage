@@ -79,11 +79,29 @@ function checkPhone(){
     }
 }
 
+function checkPass(){
+    const value = password.value.trim();
+    if (value.length < 8) {
+        setError(password, 'Password must be at least 8 characters long');
+        valid=false;
+    } else if (!value.match(/[A-Z]/)) {
+        setError(password, 'Password must contain at least one uppercase letter');
+        valid=false;
+    } else if (!value.match(/[0-9]/)) {
+        setError(password, 'Password must contain at least one number');
+        valid=false;
+    } else if (!value.match(/[#?!@$%^&*-]/)) {
+        setError(password, 'Password must contain at least one special character');
+        valid=false;
+    }
+}
+
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearErrors();
     valid=true;
     checkEmail();
     checkPhone();
+    checkPass();
     applyCheckEmpty();
 })
