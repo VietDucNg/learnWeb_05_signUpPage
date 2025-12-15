@@ -2,7 +2,7 @@
 
 <br></br>
 🪪 <strong> Sign-up page </strong>
-<p> A modern sign-up page built using HTML, CSS, and JavaScript, with client-side form validation. </p>
+<p> A robust sign-up page built using HTML, CSS, and JavaScript, with real-time client-side form validation. </p>
 
 👉 <a  href='https://vietducng.github.io/learnWeb_05_signUpPage/'>Live Demo</a>
 
