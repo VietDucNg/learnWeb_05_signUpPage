@@ -44,14 +44,12 @@ function clearValidation(){
 
 let valid = true;
 
-function checkEmpty(input){
-    if (input.value.trim()==='') {
-        setInvalid(input, '*This field is required')
-        valid=false;
-    }
-}
-function applyCheckEmpty(){
-    requiredInputs.forEach(input => checkEmpty(input))
+function checkName(name){
+    const string = name.value.trim();
+    if (!string.match(/^[a-zA-Z ]{2,30}$/)){
+        setInvalid(name, 'Enter a valid name');
+        valid=false
+    } else setValid(name);
 }
 
 function checkEmail(){
@@ -109,6 +107,16 @@ function checkConfirmPass() {
     } else if (confirmPassword.value.trim().length>0) setValid(confirmPassword);
 }
 
+function checkEmpty(input){
+    if (input.value.trim()==='') {
+        setInvalid(input, '*This field is required')
+        valid=false;
+    }
+}
+function applyCheckEmpty(){
+    requiredInputs.forEach(input => checkEmpty(input))
+}
+
 function reset() {
     if (valid) {
         signupMsg.textContent = 'Welcome to the ring!';
@@ -120,6 +128,8 @@ form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearValidation();
     valid=true;
+    checkName(firstName);
+    checkName(lastName);
     checkEmail();
     checkPhone();
     checkPass();
