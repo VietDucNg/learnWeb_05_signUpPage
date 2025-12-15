@@ -92,19 +92,19 @@ function checkPhone(){
 
 function checkPass(){
     const value = password.value.trim();
-    if (value.length < 8) {
+    if (value && value.length < 8) {
         setInvalid(password, 'Password must be at least 8 characters long');
         valid=false;
-    } else if (!value.match(/[A-Z]/)) {
+    } else if (value && !value.match(/[A-Z]/)) {
         setInvalid(password, 'Password must contain at least one uppercase letter');
         valid=false;
-    } else if (!value.match(/[0-9]/)) {
+    } else if (value && !value.match(/[0-9]/)) {
         setInvalid(password, 'Password must contain at least one number');
         valid=false;
-    } else if (!value.match(/[#?!@$%^&*-]/)) {
+    } else if (value && !value.match(/[#?!@$%^&*-]/)) {
         setInvalid(password, 'Password must contain at least one special character');
         valid=false;
-    } else setValid(password);
+    } else if (value) setValid(password);
 }
 
 function checkConfirmPass() {
@@ -150,6 +150,11 @@ email.addEventListener('input', ()=> {
 phone.addEventListener('input', ()=> {
     clearValidation(phone);
     checkPhone();
+})
+
+password.addEventListener('input', ()=>{
+    clearValidation(password);
+    checkPass();
 })
 
 form.addEventListener('submit', (e)=>{
