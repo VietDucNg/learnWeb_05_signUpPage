@@ -11,6 +11,9 @@ const successMsg = document.querySelector('.signup-msg');
 const signupBtns = document.querySelectorAll('.signup-btn');
 const requiredInputs = document.querySelectorAll('input[required]')
 
+const NAME_REGEX = /^[\p{L}][\p{L} '-]{1,29}$/u;
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 // deal with focus style for input-div
 inputDivs.forEach(div => div.addEventListener('click',()=>{
     const input = div.querySelector('input, select');
@@ -50,7 +53,7 @@ function clearValidationAll(){
 
 function checkName(name){
     const string = name.value.trim();
-    if (string && !string.match(/^[\p{L}][\p{L} '-]{1,29}$/u)){
+    if (string && !NAME_REGEX.test(string)){
         setInvalid(name, 'Enter a valid name');
         return false;
     } else if (string) {
@@ -60,9 +63,8 @@ function checkName(name){
 }
 
 function checkEmail(){
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const string = email.value.trim();
-    if (string && !string.match(emailPattern)) {
+    if (string && !EMAIL_REGEX.test(string)) {
         setInvalid(email, 'Enter a valid email')
         return false;
     } else if (string) {
@@ -194,7 +196,7 @@ form.addEventListener('submit', (e)=>{
     checkConfirmPass() 
 
     applyCheckEmpty();
-    
+
     if (isValid) reset();
 })
 
