@@ -52,7 +52,7 @@ let valid = true;
 
 function checkName(name){
     const string = name.value.trim();
-    if (string && !string.match(/^[a-zA-Z ]{2,30}$/)){
+    if (string && !string.match(/^[\p{L}][\p{L} '-]{1,29}$/u)){
         setInvalid(name, 'Enter a valid name');
         valid=false
     } else if (string) setValid(name);
