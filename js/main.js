@@ -48,14 +48,15 @@ function clearValidationAll(){
     inputDivs.forEach(div => div.classList.remove('invalid','valid'))
 }
 
-let valid = true;
-
 function checkName(name){
     const string = name.value.trim();
     if (string && !string.match(/^[\p{L}][\p{L} '-]{1,29}$/u)){
         setInvalid(name, 'Enter a valid name');
-        valid=false
-    } else if (string) setValid(name);
+        return false;
+    } else if (string) {
+        setValid(name);
+        return true;
+    }
 }
 
 function checkEmail(){
@@ -63,8 +64,11 @@ function checkEmail(){
     const string = email.value.trim();
     if (string && !string.match(emailPattern)) {
         setInvalid(email, 'Enter a valid email')
-        valid=false;
-    } else if (string) setValid(email);
+        return false;
+    } else if (string) {
+        setValid(email);
+        return true;
+    }
 }
 
 function checkPhone(){
@@ -72,65 +76,73 @@ function checkPhone(){
     const digits = value.replace(/\+/g, '');
     if (value && !value.match(/^\+?\d+$/)) {
         setInvalid(phone, 'Phone number can only contain digits, or start with +')
-        valid=false;
+        return false;
     } else if (value && digits.length < 8 || digits.length > 15) {
         setInvalid(phone,'Phone number must contain 8-15 digits');
-        valid=false;
+        return false;
     } else if (value && value.startsWith('+')) {
         if (!value.match(/^\+\d/)) {
             setInvalid(phone,'Number cannot end with +. It must be followed by digits');
-            valid=false
+            return false;
         } else if (value.match(/^\+0/)) {
             setInvalid(phone, 'When using international format (+), the first digit cannot be 0');
-            valid=false;
+            return false;
         } else setValid(phone);
     } else if (value && !value.match(/^0/)){
         setInvalid(phone, 'Local numbers must start with 0');
-        valid=false;
-    } else if (value) setValid(phone);
+        return false;
+    } else if (value) {
+        setValid(phone);
+        return true;
+    }
 }
 
 function checkPass(){
     const value = password.value.trim();
     if (value && value.length < 8) {
         setInvalid(password, 'Password must be at least 8 characters long');
-        valid=false;
+        return false;
     } else if (value && !value.match(/[A-Z]/)) {
         setInvalid(password, 'Password must contain at least one uppercase letter');
-        valid=false;
+        return false;
     } else if (value && !value.match(/[0-9]/)) {
         setInvalid(password, 'Password must contain at least one number');
-        valid=false;
+        return false;
     } else if (value && !value.match(/[#?!@$%^&*-]/)) {
         setInvalid(password, 'Password must contain at least one special character');
-        valid=false;
-    } else if (value) setValid(password);
+        return false;
+    } else if (value) {
+        setValid(password);
+        return true;
+    }
 }
 
 function checkConfirmPass() {
     const string = confirmPassword.value.trim();
     if (string && string !== password.value.trim()) {
         setInvalid(confirmPassword, 'Passwords do not match');
-        valid=false;
-    } else if (string) setValid(confirmPassword);
+        return false;
+    } else if (string) {
+        setValid(confirmPassword);
+        return true;
+    }
 }
 
 function checkEmpty(input){
     if (input.value.trim()==='') {
         setInvalid(input, '*This field is required')
-        valid=false;
-    }
+        return false;
+    } else return true;
 }
+
 function applyCheckEmpty(){
     requiredInputs.forEach(input => checkEmpty(input))
 }
 
 function reset() {
-    if (valid) {
-        clearValidationAll();
-        successMsg.textContent = 'Welcome to the ring!';
-        form.reset();
-    }
+    clearValidationAll();
+    successMsg.textContent = 'Welcome to the ring!';
+    form.reset();
 }
 
 firstName.addEventListener('input', ()=> {
@@ -168,14 +180,17 @@ confirmPassword.addEventListener('input', ()=>{
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     clearValidationAll();
-    valid=true;
-    checkName(firstName);
-    checkName(lastName);
-    checkEmail();
-    checkPhone();
-    checkPass();
-    checkConfirmPass();
+
+    const isValid = 
+    checkName(firstName) &&
+    checkName(lastName) &&
+    checkEmail() &&
+    checkPhone() &&
+    checkPass() &&
+    checkConfirmPass() 
+
     applyCheckEmpty();
-    reset();
+
+    if (isValid) reset();
 })
 
