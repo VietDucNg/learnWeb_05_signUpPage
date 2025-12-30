@@ -87,7 +87,10 @@ function checkPhone(){
         } else if (value.match(/^\+0/)) {
             setInvalid(phone, 'When using international format (+), the first digit cannot be 0');
             return false;
-        } else setValid(phone);
+        } else {
+            setValid(phone);
+            return true;
+        }
     } else if (value && !value.match(/^0/)){
         setInvalid(phone, 'Local numbers must start with 0');
         return false;
@@ -140,6 +143,7 @@ function applyCheckEmpty(){
 }
 
 function reset() {
+    console.log('here')
     clearValidationAll();
     successMsg.textContent = 'Welcome to the ring!';
     form.reset();
@@ -190,7 +194,7 @@ form.addEventListener('submit', (e)=>{
     checkConfirmPass() 
 
     applyCheckEmpty();
-
+    
     if (isValid) reset();
 })
 
