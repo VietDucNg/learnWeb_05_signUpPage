@@ -44,7 +44,7 @@ form {
     margin-top: 2rem;
 }
 
-form, .name-div, .other-div {
+.name-div, .other-div {
     gap: 1rem;
 }
 

@@ -126,6 +126,9 @@ input, select {
 
 .error {
   color: red;
+  display: block;
+  line-height: 1.5;
+  min-height: 1.5em;
 }
 
 .signup-msg {
